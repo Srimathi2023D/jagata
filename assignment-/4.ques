@@ -1,0 +1,98 @@
+import java.util.*;
+
+class Employee {
+    // Data members
+    private int empId;
+    private String empName;
+    private String empAddress;
+    private String empDesignation;
+    private String empDepartment;
+    private String empPhoneNo;
+    private double empBasicPay;
+    private double empHRA;
+    private double empDA;
+    private double empTA;
+    private double empSalary;
+
+    // Constructor
+    public Employee(int empId, String empName, String empAddress, String empDesignation, String empDepartment, String empPhoneNo, double empBasicPay) {
+        this.empId = empId;
+        this.empName = empName;
+        this.empAddress = empAddress;
+        this.empDesignation = empDesignation;
+        this.empDepartment = empDepartment;
+        this.empPhoneNo = empPhoneNo;
+        this.empBasicPay = empBasicPay;
+        calculateSalary();
+    }
+
+    // Method to calculate the total salary
+    private void calculateSalary() {
+        this.empHRA = 0.10 * empBasicPay;
+        this.empDA = 0.02 * empBasicPay;
+        this.empTA = 0.02 * empBasicPay;
+        this.empSalary = empBasicPay + empHRA + empDA + empTA;
+    }
+
+    // Getters
+    public String getEmpDepartment() {
+        return empDepartment;
+    }
+
+    public double getEmpSalary() {
+        return empSalary;
+    }
+
+    public String getEmpName() {
+        return empName;
+    }
+
+    // Method to display employee details
+    public void display() {
+        System.out.println("Employee ID       : " + empId);
+        System.out.println("Employee Name     : " + empName);
+        System.out.println("Employee Address  : " + empAddress);
+        System.out.println("Designation       : " + empDesignation);
+        System.out.println("Department        : " + empDepartment);
+        System.out.println("Phone No          : " + empPhoneNo);
+        System.out.println("Basic Pay         : " + empBasicPay);
+        System.out.println("HRA               : " + empHRA);
+        System.out.println("DA                : " + empDA);
+        System.out.println("TA                : " + empTA);
+        System.out.println("Total Salary      : " + empSalary);
+        System.out.println("----------------------------------");
+    }
+}
+
+public class EmployeeManagement {
+    public static void main(String[] args) {
+        // List to store employees
+        List<Employee> employees = new ArrayList<>();
+
+        // Adding employee data
+        employees.add(new Employee(1, "Alice", "123 Maple St", "Manager", "HR", "1234567890", 50000));
+        employees.add(new Employee(2, "Bob", "456 Oak St", "Engineer", "IT", "0987654321", 60000));
+        employees.add(new Employee(3, "Charlie", "789 Pine St", "Technician", "Maintenance", "1230984567", 45000));
+        employees.add(new Employee(4, "David", "321 Elm St", "Analyst", "Finance", "5678901234", 70000));
+        employees.add(new Employee(5, "Eve", "654 Cedar St", "Clerk", "HR", "7894561230", 40000));
+        employees.add(new Employee(6, "Frank", "987 Spruce St", "Developer", "IT", "3456789012", 75000));
+        employees.add(new Employee(7, "Grace", "246 Birch St", "Supervisor", "Maintenance", "6543210987", 48000));
+
+        // Map to track the highest-paid employee in each department
+        Map<String, Employee> highestPaidInDept = new HashMap<>();
+
+        // Processing each employee to find the highest salary in each department
+        for (Employee emp : employees) {
+            String dept = emp.getEmpDepartment();
+            if (!highestPaidInDept.containsKey(dept) || emp.getEmpSalary() > highestPaidInDept.get(dept).getEmpSalary()) {
+                highestPaidInDept.put(dept, emp);
+            }
+        }
+
+        // Display the employee with the highest salary in each department
+        System.out.println("Highest Paid Employees in Each Department:");
+        for (Employee emp : highestPaidInDept.values()) {
+            emp.display();
+        }
+    }
+}
