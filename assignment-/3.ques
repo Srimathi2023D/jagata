@@ -1,0 +1,72 @@
+class Student {
+    // Data members
+    private String name;
+    private String regNo;
+    private String dept;
+    private int year;
+    private int semester;
+    private int mark1, mark2, mark3, mark4, mark5, mark6;
+    private int total;
+    private double average;
+
+    // Method to get details from user
+    public void getDetails(String name, String regNo, String dept, int year, int semester, int mark1, int mark2, int mark3, int mark4, int mark5, int mark6) {
+        this.name = name;
+        this.regNo = regNo;
+        this.dept = dept;
+        this.year = year;
+        this.semester = semester;
+        this.mark1 = mark1;
+        this.mark2 = mark2;
+        this.mark3 = mark3;
+        this.mark4 = mark4;
+        this.mark5 = mark5;
+        this.mark6 = mark6;
+        calculateTotalAndAverage();
+    }
+
+    // Method to calculate total and average
+    private void calculateTotalAndAverage() {
+        total = mark1 + mark2 + mark3 + mark4 + mark5 + mark6;
+        average = total / 6.0;
+    }
+
+    // Method to display the student's mark statement
+    public void display() {
+        System.out.println("Student Name   : " + name);
+        System.out.println("Registration No: " + regNo);
+        System.out.println("Department     : " + dept);
+        System.out.println("Year           : " + year);
+        System.out.println("Semester       : " + semester);
+        System.out.println("Marks:");
+        System.out.println("  Subject 1: " + mark1);
+        System.out.println("  Subject 2: " + mark2);
+        System.out.println("  Subject 3: " + mark3);
+        System.out.println("  Subject 4: " + mark4);
+        System.out.println("  Subject 5: " + mark5);
+        System.out.println("  Subject 6: " + mark6);
+        System.out.println("Total Marks    : " + total);
+        System.out.printf("Average Marks  : %.2f%%\n", average);
+    }
+}
+
+public class StudentMarks {
+    public static void main(String[] args) {
+        // Creating an instance of the Student class
+        Student student = new Student();
+
+        // Assuming these details are obtained from user input
+        String name = "John Doe";
+        String regNo = "REG12345";
+        String dept = "Computer Science";
+        int year = 3;
+        int semester = 6;
+        int mark1 = 85, mark2 = 90, mark3 = 75, mark4 = 88, mark5 = 92, mark6 = 81;
+
+        // Setting the student's details
+        student.getDetails(name, regNo, dept, year, semester, mark1, mark2, mark3, mark4, mark5, mark6);
+
+        // Displaying the student's mark statement
+        student.display();
+    }
+}
