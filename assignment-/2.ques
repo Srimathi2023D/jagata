@@ -1,0 +1,35 @@
+import java.util.Scanner;
+
+public class RepeatedCharacterCount {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        // Input the string
+        String s = scanner.nextLine();
+        
+        int count = 0;
+        int length = s.length();
+        
+        // Iterate through the string to find characters that occur more than twice continuously
+        for (int i = 0; i < length;) {
+            char currentChar = s.charAt(i);
+            int repeatCount = 1;
+
+            // Count the number of continuous occurrences of the current character
+            while (i + repeatCount < length && s.charAt(i + repeatCount) == currentChar) {
+                repeatCount++;
+            }
+
+            // If the character occurs more than twice continuously, increment the count
+            if (repeatCount > 2) {
+                count++;
+            }
+
+            // Move to the next character
+            i += repeatCount;
+        }
+        
+        // Print the count of characters occurring more than twice continuously
+        System.out.println(count);
+    }
+}
